@@ -17,3 +17,7 @@ for(let i = 0; i < gridHeight; i++) {
     }
 }
 
+container.addEventListener("mouseover", (event) => {
+    const hoverDiv = event.target;
+    hoverDiv.classList.add("paintedElement");
+});

@@ -27,7 +27,8 @@ function createGrid(rows, cols){
 
 container.addEventListener("mouseover", (event) => {
     const hoverDiv = event.target;
-    hoverDiv.classList.add("paintedElement");
+    const randomHexColor = Math.floor(Math.pow(2, 24) * Math.random()).toString(16);
+    hoverDiv.style.backgroundColor = `#${randomHexColor}`;
 });
 
 sizeButton.addEventListener("click", () => {

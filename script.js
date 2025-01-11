@@ -10,11 +10,18 @@ document.getElementsByTagName("head")[0].appendChild(gridElementStyle);
 const container = document.querySelector("#divContainer");
 const sizeButton = document.querySelector("#sizeButton");
 
-for(let i = 0; i < gridRows; i++) {
-    for(let j = 0; j < gridCols; j++) {
-	const gridElement = document.createElement("div");
-	gridElement.classList.add("container-element");
-    	container.appendChild(gridElement);
+function createGrid(rows, cols){
+    const gridElements = container.querySelectorAll(".container-element");
+    for (const elem of Array.from(gridElements)) {
+	elem.remove();
+    }
+
+    for(let i = 0; i < rows; i++) {
+	for(let j = 0; j < cols; j++) {
+	    const gridElement = document.createElement("div");
+	    gridElement.classList.add("container-element");
+	    container.appendChild(gridElement);
+	}
     }
 }
 
@@ -24,14 +31,14 @@ container.addEventListener("mouseover", (event) => {
 });
 
 sizeButton.addEventListener("click", () => {
-    gridRows = prompt("Insert number of rows");
-    if(gridRows > 100) gridRows = prompt("Invalid number of rows, max 100");
-    gridCols = prompt("Insert number of cols");
-    if(gridCols > 100) gridCols = prompt("Invalid number of cols, max 100");
+    gridRows = prompt("Insert number of rows", 10);
+    if(gridRows > 100 || gridRows < 1) gridRows = prompt("Invalid number of rows, max 100 min 1");
+    gridCols = prompt("Insert number of cols", 10);
+    if(gridCols > 100 || gridCols < 1) gridCols = prompt("Invalid number of cols, max 100 min 1");
+    
     gridElementStyle.innerHTML = 
     `.container-element { width: ${(100/gridCols).toFixed(3)}%; height: ${(100/gridRows).toFixed(3)}% }`;
-    const gridElements = container.querySelectorAll(".container-element");
-    for(const elem of gridElements) {
-	elem.classList.remove("paintedElement");
-    }
+    createGrid(gridRows, gridCols);
 });
+
+createGrid(gridRows, gridCols);

@@ -25,9 +25,11 @@ container.addEventListener("mouseover", (event) => {
 
 sizeButton.addEventListener("click", () => {
     gridRows = prompt("Insert number of rows");
+    if(gridRows > 100) gridRows = prompt("Invalid number of rows, max 100");
     gridCols = prompt("Insert number of cols");
+    if(gridCols > 100) gridCols = prompt("Invalid number of cols, max 100");
     gridElementStyle.innerHTML = 
-    `.container-element { width: ${100/gridCols}%; height: ${100/gridRows}% }`;
+    `.container-element { width: ${(100/gridCols).toFixed(3)}%; height: ${(100/gridRows).toFixed(3)}% }`;
     const gridElements = container.querySelectorAll(".container-element");
     for(const elem of gridElements) {
 	elem.classList.remove("paintedElement");
